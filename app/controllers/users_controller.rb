@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = "User Successfully Created!"
-      redirect_to root_path
+      redirect_to posts_path
     else
       flash[:warning] = @user.errors.full_messages.join(", ")
       redirect_to root_path
