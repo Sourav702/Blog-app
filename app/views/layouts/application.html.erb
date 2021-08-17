@@ -8,12 +8,40 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
   </head>
 
   <body>
-   <% flash.each do |name, msg| %>
+  <br />
+  <br />  <br />  <br />  <br />
+  <div id="main_content" class="container">
+		  <div id="header">
+			  <% if current_user %>
+          <% if current_page?(root_path) %>
+				    <p>All Posts</p>
+			    <% else %>
+				    <%= link_to "Back to All Posts", posts_path %>
+			    <% end %>
+
+          <div class="buttons">
+					  <button class="button"><%= link_to "New Post", root_path %></button><br />
+					  Logged in as <%= current_user.name%>(<%= current_user.email %>).<br />
+            <button class="button"><%= link_to "Log Out", logout_path %></button>
+				  </div>
+
+        <% else %>
+          <%= link_to "Sign Up", signup_path %> or
+          <%= link_to "Log In", login_path %>
+			  <% end %>
+		  </div>
+
+      <% flash.each do |name, msg| %>
 			  <%= content_tag(:div, msg, class: "alert") %>
 		  <% end %>
-    <%= yield %>
+
+		  <%= yield %>
+	  </div>
   </body>
 </html>
