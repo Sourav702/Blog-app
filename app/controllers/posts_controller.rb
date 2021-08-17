@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :check_user_access, only: [:edit,:update,:destroy]
 	def index
 		@posts = Post.all.order('created_at DESC')
+		# @posts=Post.includes
 	end
 
 	def new
